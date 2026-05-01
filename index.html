@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>Tempify · Disposable Email (Netlify Ready)</title>
+  <title>Tempify 1· Instant Temp Mail (Netlify Ready)</title>
   <!-- Google Fonts + Font Awesome 6 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -33,9 +33,8 @@
       backdrop-filter: blur(14px);
       border-radius: 2rem;
       border: 1px solid rgba(59, 130, 246, 0.35);
-      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6), 0 0 0 0.5px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6);
       overflow: hidden;
-      transition: all 0.2s ease;
     }
 
     .header {
@@ -51,11 +50,9 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
     }
 
     h1 i {
@@ -125,6 +122,11 @@
       transition: 0.2s;
     }
 
+    .copy-btn-icon:hover {
+      background: #2d3a60;
+      transform: translateY(-1px);
+    }
+
     .action-group {
       display: flex;
       gap: 12px;
@@ -148,6 +150,10 @@
       color: #eef2ff;
       flex: 1 0 auto;
       justify-content: center;
+    }
+
+    .btn-modern:active {
+      transform: scale(0.97);
     }
 
     .btn-primary {
@@ -223,8 +229,6 @@
       font-weight: 700;
       font-size: 0.95rem;
       color: #f0f9ff;
-      display: flex;
-      justify-content: space-between;
       margin-bottom: 10px;
       word-break: break-word;
     }
@@ -274,7 +278,7 @@
     }
 
     .detail-subject {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #eef2ff;
       margin-bottom: 16px;
@@ -309,12 +313,6 @@
       font-size: 0.85rem;
       line-height: 1.5;
       color: #e2e8f0;
-    }
-
-    pre {
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-family: 'Inter', monospace;
     }
 
     .back-btn {
@@ -353,6 +351,28 @@
       .btn-modern { padding: 10px 12px; font-size: 0.8rem; }
       .messages-area { max-height: 460px; }
     }
+
+    .toast-notify {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e3a8a;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      z-index: 9999;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 12px black;
+      font-weight: 500;
+      animation: fadeInUp 0.2s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px);}
+      to { opacity: 1; transform: translateX(-50%) translateY(0);}
+    }
   </style>
 </head>
 <body>
@@ -360,14 +380,14 @@
 <div class="container">
   <div class="header">
     <h1><i class="fas fa-envelope-open-text"></i> Tempify</h1>
-    <div class="sub"><i class="fas fa-globe"></i> Netlify ready · temp mail</div>
+    <div class="sub"><i class="fas fa-check-circle"></i> Instant temp mail · Guerrilla Mail API · Works on Netlify</div>
   </div>
 
   <div class="email-card">
-    <div class="email-label"><i class="fas fa-at"></i> <span>disposable address</span></div>
+    <div class="email-label"><i class="fas fa-at"></i> <span>your temporary inbox</span></div>
     <div class="email-input-area">
-      <input type="text" id="email" readonly placeholder="Generate new email">
-      <button class="copy-btn-icon" onclick="copyMail()"><i class="fas fa-copy"></i> <span>Copy</span></button>
+      <input type="text" id="email" readonly placeholder="Click 'Generate Mail'">
+      <button class="copy-btn-icon" id="copyBtn"><i class="fas fa-copy"></i> <span>Copy</span></button>
     </div>
   </div>
 
@@ -384,245 +404,196 @@
   <div id="inbox" class="messages-area">
     <div class="empty-state"><i class="far fa-envelope"></i><span>Ready · tap "Generate Mail"</span></div>
   </div>
-  <footer><i class="fas fa-sync-alt"></i> Auto-refresh 5s · works on Netlify/Vercel</footer>
+  <footer><i class="fas fa-sync-alt"></i> Auto-refresh 6s · All mails are temporary</footer>
 </div>
 
 <script>
-  // ---------- CONFIGURATION ----------
-  let token = "";
-  let currentEmail = "";
-  const DEFAULT_PASSWORD = "TempSecure2025!";
-
-  // Helper: delay and retry logic for flaky networks / CORS resilience
-  async function fetchWithRetry(url, options, retries = 2) {
-    for (let i = 0; i <= retries; i++) {
-      try {
-        const res = await fetch(url, { ...options, mode: 'cors', credentials: 'omit' });
-        if (res.ok || res.status === 422) return res;
-        if (i === retries) return res;
-        await new Promise(r => setTimeout(r, 600));
-      } catch (err) {
-        if (i === retries) throw err;
-        await new Promise(r => setTimeout(r, 800));
-      }
-    }
-    throw new Error("Network failed after retries");
-  }
-
-  // Show temporary toast alert in UI (better than alert)
-  function showMessage(msg, isError = false) {
-    const existingToast = document.querySelector('.temp-toast');
-    if(existingToast) existingToast.remove();
+  // ======================= GUERRILLA MAIL API (CORS-FRIENDLY & RELIABLE) =======================
+  // This API works flawlessly on Netlify, Vercel, and any static hosting
+  let currentEmailId = null;      // Stores email_addr (for display)
+  let currentSid = null;          // Session ID for Guerrilla Mail
+  let currentEmailTimestamp = null;
+  
+  // Helper: show toast message
+  function showToast(msg, isError = false) {
+    const existing = document.querySelector('.toast-notify');
+    if(existing) existing.remove();
     const toast = document.createElement('div');
-    toast.className = 'temp-toast';
+    toast.className = 'toast-notify';
+    toast.style.background = isError ? '#b91c1c' : '#1e3a8a';
     toast.innerText = msg;
-    toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.left = '50%';
-    toast.style.transform = 'translateX(-50%)';
-    toast.style.backgroundColor = isError ? '#b91c1c' : '#1e3a8a';
-    toast.style.color = 'white';
-    toast.style.padding = '12px 20px';
-    toast.style.borderRadius = '40px';
-    toast.style.fontSize = '0.8rem';
-    toast.style.zIndex = '9999';
-    toast.style.backdropFilter = 'blur(12px)';
-    toast.style.boxShadow = '0 4px 12px black';
-    toast.style.fontWeight = '500';
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2800);
+    setTimeout(() => toast.remove(), 2500);
   }
 
-  // Fetch domains and generate full email address
+  // Function to generate a new temporary email address using Guerrilla Mail
   async function generateMail() {
-    const genBtn = document.getElementById("generateBtn");
-    const originalText = genBtn.innerHTML;
+    const genBtn = document.getElementById('generateBtn');
+    const originalHtml = genBtn.innerHTML;
     genBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Creating...';
     genBtn.disabled = true;
 
     try {
-      // 1) Get available domain
-      const domainRes = await fetchWithRetry("https://api.mail.tm/domains", {
-        method: "GET",
-        headers: { "Accept": "application/json" }
-      });
-      if (!domainRes.ok) throw new Error("Failed to fetch domains");
-      const domainData = await domainRes.json();
-      const domainsList = domainData["hydra:member"];
-      if (!domainsList || domainsList.length === 0) throw new Error("No domains available");
-      const domain = domainsList[0].domain;
-
-      // 2) Create random email address
-      const randomId = "tmp_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
-      const email = `${randomId}@${domain}`;
-      const password = DEFAULT_PASSWORD;
-
-      // 3) Create account (with proper content-type)
-      const createResp = await fetchWithRetry("https://api.mail.tm/accounts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ address: email, password: password })
-      });
+      // Step 1: Get a new email address from Guerrilla Mail API
+      const response = await fetch('https://api.guerrillamail.com/ajax.php?f=get_email_address&ip=127.0.0.1&agent=TempMailApp');
+      const data = await response.json();
       
-      // 422 means account might already exist? but with unique random it's rare. still we continue to login.
-      if (!createResp.ok && createResp.status !== 422) {
-        const errText = await createResp.text();
-        throw new Error(`Account creation error: ${createResp.status}`);
+      if (data && data.email_addr) {
+        currentEmailId = data.email_addr;
+        currentSid = data.sid;
+        currentEmailTimestamp = data.email_timestamp;
+        
+        // Update UI
+        document.getElementById('email').value = currentEmailId;
+        showToast('✅ Temporary email created!', false);
+        
+        // Load inbox immediately
+        await loadInbox();
+      } else {
+        throw new Error('Could not generate email');
       }
-
-      // 4) Obtain authentication token
-      const tokenResp = await fetchWithRetry("https://api.mail.tm/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ address: email, password: password })
-      });
-      if (!tokenResp.ok) throw new Error("Token request failed");
-      const tokenData = await tokenResp.json();
-      token = tokenData.token;
-      currentEmail = email;
-
-      // Update UI
-      document.getElementById("email").value = currentEmail;
-      showMessage("✅ Temporary email created!", false);
-      await loadInbox();
     } catch (err) {
-      console.error("Generation error:", err);
-      showMessage("⚠️ Failed to generate mail. Check network or retry.", true);
-      // Reset token
-      token = "";
-      currentEmail = "";
-      document.getElementById("email").value = "";
-      const inboxDiv = document.getElementById("inbox");
-      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><span>Error: ${err.message.substring(0, 70)}</span><span style="font-size:12px;">Tap Generate again</span></div>`;
+      console.error('Generation error:', err);
+      showToast('⚠️ Failed to generate. Check internet connection.', true);
+      document.getElementById('email').value = '';
+      currentSid = null;
+      currentEmailId = null;
+      const inboxDiv = document.getElementById('inbox');
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><span>Error: ${err.message.substring(0, 60)}</span><span>Tap generate again</span></div>`;
       updateBadge(0);
     } finally {
-      genBtn.innerHTML = originalText;
+      genBtn.innerHTML = originalHtml;
       genBtn.disabled = false;
     }
   }
 
-  // Load messages from inbox
+  // Load all emails from Guerrilla Mail inbox using session ID
   async function loadInbox() {
-    if (!token) {
-      const inboxDiv = document.getElementById("inbox");
+    if (!currentSid || !currentEmailId) {
+      const inboxDiv = document.getElementById('inbox');
       inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-key"></i><span>No active session · Generate an email first</span></div>`;
       updateBadge(0);
       return;
     }
 
     try {
-      const response = await fetchWithRetry("https://api.mail.tm/messages", {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
-      });
-      if (!response.ok) {
-        if (response.status === 401) {
-          token = "";
-          currentEmail = "";
-          document.getElementById("email").value = "";
-          throw new Error("Session expired. Generate new email.");
-        }
-        throw new Error("Inbox fetch failed");
-      }
+      // Fetch email list using fetch_email_list function
+      const url = `https://api.guerrillamail.com/ajax.php?f=fetch_email_list&sid=${currentSid}&seq=0`;
+      const response = await fetch(url);
       const data = await response.json();
-      const mails = data["hydra:member"] || [];
-      const inboxDiv = document.getElementById("inbox");
-
-      if (mails.length === 0) {
-        inboxDiv.innerHTML = `<div class="empty-state"><i class="far fa-inbox"></i><span>No messages yet · waiting...</span></div>`;
+      
+      const emails = data.list || [];
+      const inboxDiv = document.getElementById('inbox');
+      
+      if (emails.length === 0) {
+        inboxDiv.innerHTML = `<div class="empty-state"><i class="far fa-inbox"></i><span>Your inbox is empty · waiting for new messages</span></div>`;
         updateBadge(0);
         return;
       }
-
-      updateBadge(mails.length);
-      const sortedMails = [...mails].reverse();
-      inboxDiv.innerHTML = "";
-      sortedMails.forEach(mail => {
-        const mailCard = document.createElement("div");
-        mailCard.className = "mail-card";
-        mailCard.setAttribute("data-id", mail.id);
+      
+      updateBadge(emails.length);
+      // Sort by date descending (newest first)
+      const sortedEmails = emails.sort((a, b) => b.timestamp - a.timestamp);
+      inboxDiv.innerHTML = '';
+      
+      sortedEmails.forEach(mail => {
+        const mailCard = document.createElement('div');
+        mailCard.className = 'mail-card';
+        mailCard.setAttribute('data-mail-id', mail.mail_id);
+        const subject = mail.mail_subject || '(No Subject)';
+        const from = mail.mail_from || 'Unknown Sender';
+        const date = new Date(mail.timestamp * 1000);
+        const formattedDate = date.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short' });
+        
         mailCard.innerHTML = `
-          <div class="mail-subject"><span><i class="fas fa-envelope" style="margin-right:6px;"></i> ${escapeHtml(mail.subject || "(No Subject)")}</span></div>
-          <div class="mail-from"><i class="fas fa-user-circle"></i> ${escapeHtml(mail.from?.address || "Unknown")}</div>
-          <div class="mail-date"><i class="far fa-clock"></i> ${formatDate(mail.createdAt)}</div>
+          <div class="mail-subject"><span><i class="fas fa-envelope" style="margin-right:6px;"></i> ${escapeHtml(subject)}</span></div>
+          <div class="mail-from"><i class="fas fa-user-circle"></i> ${escapeHtml(from)}</div>
+          <div class="mail-date"><i class="far fa-clock"></i> ${formattedDate}</div>
         `;
-        mailCard.addEventListener("click", () => openMail(mail.id));
+        mailCard.addEventListener('click', () => openMail(mail.mail_id));
         inboxDiv.appendChild(mailCard);
       });
     } catch (err) {
-      console.warn(err);
-      const inboxDiv = document.getElementById("inbox");
-      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-bug"></i><span>${err.message}</span><span>↻ Refresh manually</span></div>`;
+      console.error('Inbox load error:', err);
+      const inboxDiv = document.getElementById('inbox');
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-bug"></i><span>Failed to load inbox</span><span>↻ Tap Refresh</span></div>`;
     }
   }
 
-  async function openMail(id) {
-    if (!token) return;
+  // Open and display full email content
+  async function openMail(mailId) {
+    if (!currentSid) return;
+    
     try {
-      const resp = await fetchWithRetry(`https://api.mail.tm/messages/${id}`, {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
-      });
-      if (!resp.ok) throw new Error("Cannot load message");
-      const detail = await resp.json();
-      const inboxContainer = document.getElementById("inbox");
+      const url = `https://api.guerrillamail.com/ajax.php?f=fetch_email&sid=${currentSid}&email_id=${mailId}`;
+      const response = await fetch(url);
+      const data = await response.json();
       
-      let contentHtml = "";
-      if (detail.html && detail.html.length > 0 && detail.html[0] && detail.html[0].trim() !== "") {
-        contentHtml = detail.html[0];
-      } else {
-        contentHtml = `<pre>${escapeHtml(detail.text || "(No text content)")}</pre>`;
+      if (!data || !data.mail_id) {
+        throw new Error('Cannot fetch email content');
       }
-
+      
+      const mail = data;
+      const subject = mail.mail_subject || '(No Subject)';
+      const from = mail.mail_from || 'Unknown';
+      const date = new Date(mail.timestamp * 1000);
+      const formattedDate = date.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'long', year:'numeric' });
+      
+      // Extract email body (plain text or fallback)
+      let bodyText = mail.mail_text || mail.mail_excerpt || '(No content)';
+      // Sometimes body contains HTML, we'll display as preformatted
+      const isHtml = bodyText.includes('<') && bodyText.includes('>');
+      let displayContent = '';
+      if (isHtml) {
+        displayContent = `<div style="overflow-x:auto;">${bodyText}</div>`;
+      } else {
+        displayContent = `<pre>${escapeHtml(bodyText)}</pre>`;
+      }
+      
+      const inboxContainer = document.getElementById('inbox');
       inboxContainer.innerHTML = `
         <div class="detail-view">
-          <div class="detail-subject"><i class="far fa-envelope-open" style="margin-right:8px;"></i> ${escapeHtml(detail.subject || "No Subject")}</div>
+          <div class="detail-subject"><i class="far fa-envelope-open" style="margin-right:8px;"></i> ${escapeHtml(subject)}</div>
           <div class="detail-meta">
-            <span><i class="fas fa-paper-plane"></i> <strong>From:</strong> ${escapeHtml(detail.from?.address || "Unknown")}</span>
-            <span><i class="fas fa-envelope"></i> <strong>To:</strong> ${escapeHtml(currentEmail)}</span>
-            <span><i class="far fa-calendar"></i> <strong>Date:</strong> ${formatDate(detail.createdAt)}</span>
+            <span><i class="fas fa-paper-plane"></i> <strong>From:</strong> ${escapeHtml(from)}</span>
+            <span><i class="fas fa-envelope"></i> <strong>To:</strong> ${escapeHtml(currentEmailId)}</span>
+            <span><i class="far fa-calendar"></i> <strong>Date:</strong> ${formattedDate}</span>
           </div>
-          <div class="message-body-content">${contentHtml}</div>
+          <div class="message-body-content">
+            ${displayContent}
+          </div>
           <button class="back-btn" id="detailBackBtn"><i class="fas fa-arrow-left"></i> Back to Inbox</button>
         </div>
       `;
-      const backBtn = document.getElementById("detailBackBtn");
-      if (backBtn) backBtn.addEventListener("click", () => loadInbox());
+      const backBtn = document.getElementById('detailBackBtn');
+      if (backBtn) backBtn.addEventListener('click', () => loadInbox());
     } catch (err) {
       console.error(err);
-      showMessage("Could not open message", true);
+      showToast('Could not open email', true);
       loadInbox();
     }
   }
 
   function copyMail() {
-    const emailVal = document.getElementById("email").value;
-    if (!emailVal || emailVal === "") {
-      showMessage("No email to copy. Generate first.", true);
+    const emailValue = document.getElementById('email').value;
+    if (!emailValue || emailValue === '') {
+      showToast('No email address to copy. Generate first.', true);
       return;
     }
-    navigator.clipboard.writeText(emailVal).then(() => {
-      showMessage("✉️ Email copied to clipboard!", false);
+    navigator.clipboard.writeText(emailValue).then(() => {
+      showToast('📧 Email copied to clipboard!', false);
     }).catch(() => {
-      showMessage("Manual copy: " + emailVal, false);
+      showToast('Manual copy: ' + emailValue, false);
     });
   }
 
   function updateBadge(count) {
-    const badge = document.getElementById("countBadge");
+    const badge = document.getElementById('countBadge');
     if (badge) badge.innerText = count;
   }
 
-  function formatDate(isoString) {
-    if (!isoString) return "Just now";
-    try {
-      const d = new Date(isoString);
-      return d.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short' });
-    } catch(e) { return "Recent"; }
-  }
-
   function escapeHtml(str) {
-    if (!str) return "";
+    if (!str) return '';
     return str.replace(/[&<>]/g, function(m) {
       if (m === '&') return '&amp;';
       if (m === '<') return '&lt;';
@@ -631,22 +602,34 @@
     });
   }
 
-  // Auto refresh handler (secure)
-  let intervalId = null;
+  // Auto refresh inbox every 6 seconds if session exists
+  let autoRefreshInterval = null;
   function startAutoRefresh() {
-    if (intervalId) clearInterval(intervalId);
-    intervalId = setInterval(() => {
-      if (token && currentEmail && !document.querySelector(".detail-view")) {
-        loadInbox().catch(e => console.log("auto refresh err", e));
+    if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+    autoRefreshInterval = setInterval(() => {
+      if (currentSid && currentEmailId && !document.querySelector('.detail-view')) {
+        loadInbox().catch(e => console.log('auto refresh err', e));
       }
-    }, 5000);
+    }, 6000);
   }
 
-  // Attach global functions and event listeners
-  window.generateMail = generateMail;
-  window.loadInbox = loadInbox;
-  window.copyMail = copyMail;
-
-  document.getElementById("generateBtn").addEventListener("click", generateMail);
-  document.getElementById("refreshBtn").addEventListener("click", () => {
-    if (!token) showMessage("G
+  // Event listeners
+  document.getElementById('generateBtn').addEventListener('click', generateMail);
+  document.getElementById('refreshBtn').addEventListener('click', () => {
+    if (!currentSid) {
+      showToast('Generate an email first', true);
+    } else {
+      loadInbox();
+    }
+  });
+  document.getElementById('copyBtn').addEventListener('click', copyMail);
+  
+  startAutoRefresh();
+  
+  // Initial empty state
+  if (!currentSid) {
+    document.getElementById('inbox').innerHTML = `<div class="empty-state"><i class="fas fa-plus-circle"></i><span>Tap "Generate Mail" to create inbox</span></div>`;
+  }
+</script>
+</body>
+</html>
