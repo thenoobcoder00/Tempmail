@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+  <title>Tempify · Disposable Email</title>
+  <!-- Google Fonts + Font Awesome 6 (free) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 20%, #0a0f1e, #070b17);
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* MAIN CARD - fully responsive */
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(12, 18, 34, 0.85);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6), 0 0 0 0.5px rgba(56, 189, 248, 0.2);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* header */
+    .header {
+      padding: 20px 24px 12px 24px;
+      border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+      background: rgba(2, 6, 23, 0.4);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #E0F2FE, #7AA9FF, #A5F3FC);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    h1 i {
+      background: none;
+      color: #3b82f6;
+      font-size: 1.7rem;
+      text-shadow: 0 0 6px #3b82f680;
+    }
+
+    .sub {
+      color: #90a3bf;
+      font-size: 0.75rem;
+      margin-top: 8px;
+      font-weight: 400;
+      letter-spacing: -0.2px;
+    }
+
+    /* email card - mobile friendly */
+    .email-card {
+      margin: 20px 20px 16px 20px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 1.5rem;
+      border: 1px solid #2d3a5e;
+      transition: 0.2s;
+    }
+
+    .email-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px 0 18px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: #7aa2f7;
+    }
+
+    .email-input-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px 18px 18px;
+      flex-wrap: wrap;
+    }
+
+    #email {
+      flex: 1;
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 1.2rem;
+      padding: 14px 18px;
+      color: #f1f5f9;
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      transition: 0.2s;
+      width: 100%;
+      min-width: 0;
+    }
+
+    #email:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+
+    .copy-btn-icon {
+      background: #1e2a47;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 1.2rem;
+      color: #cbd5ff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .copy-btn-icon:hover {
+      background: #2d3a60;
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* button group - responsive wrap */
+    .action-group {
+      display: flex;
+      gap: 12px;
+      margin: 0px 20px 22px 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-modern {
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      padding: 11px 18px;
+      border-radius: 2.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+      color: #eef2ff;
+      flex: 1 0 auto;
+      justify-content: center;
+    }
+
+    .btn-modern i {
+      font-size: 0.95rem;
+    }
+
+    .btn-modern:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      border-color: #60a5fa;
+      color: white;
+      box-shadow: 0 6px 12px -6px #1e3a8a;
+    }
+
+    /* inbox header */
+    .inbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 20px 0px 20px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .inbox-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #cbd5ff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-count {
+      background: #1e293b;
+      padding: 2px 10px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #90cdf4;
+    }
+
+    /* messages container - touch optimized */
+    .messages-area {
+      padding: 12px 16px 28px 16px;
+      max-height: 520px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* custom smooth scroll */
+    .messages-area::-webkit-scrollbar {
+      width: 4px;
+    }
+    .messages-area::-webkit-scrollbar-track {
+      background: #0f172a;
+      border-radius: 8px;
+    }
+    .messages-area::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 8px;
+    }
+
+    /* mail card - big tappable area */
+    .mail-card {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 1.25rem;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(71, 85, 105, 0.6);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+
+    .mail-card:active {
+      transform: scale(0.99);
+      background: #2563eb20;
+    }
+
+    .mail-subject {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #f0f9ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .mail-from {
+      font-size: 0.75rem;
+      color: #9bb5e6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
+    .mail-date {
+      font-size: 0.65rem;
+      color: #7f8ea3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    /* empty state */
+    .empty-state {
+      text-align: center;
+      padding: 42px 20px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 1.8rem;
+      border: 1px dashed #334155;
+      color: #94a3b8;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .empty-state i {
+      font-size: 2.8rem;
+      opacity: 0.6;
+    }
+
+    /* detail view (mobile optimized) */
+    .detail-view {
+      background: #0f172af0;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      border: 1px solid #2d3e66;
+      animation: fadeSlide 0.2s ease;
+    }
+
+    .detail-subject {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #eef2ff;
+      margin-bottom: 16px;
+      word-break: break-word;
+      line-height: 1.3;
+    }
+
+    .detail-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #02061770;
+      padding: 12px 14px;
+      border-radius: 1rem;
+      margin: 14px 0;
+      font-size: 0.75rem;
+    }
+
+    .detail-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      word-break: break-word;
+    }
+
+    .message-body-content {
+      background: #020617a0;
+      padding: 18px;
+      border-radius: 1.2rem;
+      margin: 18px 0;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'Inter', monospace;
+    }
+
+    .back-btn {
+      background: #1e293b;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 2rem;
+      font-weight: 500;
+      color: #b9d0ff;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .back-btn:active {
+      transform: scale(0.97);
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      font-size: 0.65rem;
+      text-align: center;
+      padding: 16px 20px 20px;
+      color: #5b6e8c;
+      border-top: 1px solid rgba(71, 85, 105, 0.3);
+      margin-top: 6px;
+    }
+
+    /* 100% MOBILE RESPONSIVE ENHANCEMENTS */
+    @media (max-width: 580px) {
+      body {
+        padding: 12px;
+      }
+      .header {
+        padding: 16px 18px 10px 18px;
+      }
+      h1 {
+        font-size: 1.45rem;
+        gap: 8px;
+      }
+      h1 i {
+        font-size: 1.4rem;
+      }
+      .email-card {
+        margin: 14px 14px 12px 14px;
+      }
+      .email-input-area {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 6px 16px 16px 16px;
+      }
+      .copy-btn-icon {
+        justify-content: center;
+        padding: 11px;
+      }
+      .action-group {
+        margin: 0px 14px 18px 14px;
+        gap: 10px;
+      }
+      .btn-modern {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        flex: 1;
+      }
+      .inbox-header {
+        padding: 8px 16px 0px 16px;
+      }
+      .messages-area {
+        padding: 10px 12px 22px 12px;
+        max-height: 480px;
+      }
+      .mail-card {
+        padding: 0.85rem 1rem;
+      }
+      .mail-subject {
+        font-size: 0.88rem;
+      }
+      .detail-view {
+        padding: 1rem;
+      }
+      .detail-subject {
+        font-size: 1.1rem;
+      }
+      .message-body-content {
+        padding: 14px;
+        font-size: 0.8rem;
+      }
+      footer {
+        font-size: 0.6rem;
+        padding: 12px 16px 18px;
+      }
+    }
+
+    /* for very small devices */
+    @media (max-width: 380px) {
+      .btn-modern {
+        font-size: 0.7rem;
+        gap: 6px;
+      }
+      .btn-modern i {
+        font-size: 0.8rem;
+      }
+      .inbox-title {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>
+      <i class="fas fa-envelope-open-text"></i> 
+      Tempify
+    </h1>
+    <div class="sub"><i class="fas fa-shield-alt"></i> disposable · private · auto-refresh</div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-label">
+      <i class="fas fa-at"></i> <span>temporary address</span>
+    </div>
+    <div class="email-input-area">
+      <input type="text" id="email" readonly placeholder="Tap 'Generate Mail'">
+      <button class="copy-btn-icon" onclick="copyMail()">
+        <i class="fas fa-copy"></i> <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="action-group">
+    <button class="btn-modern btn-primary" onclick="generateMail()">
+      <i class="fas fa-magic"></i> Generate
+    </button>
+    <button class="btn-modern" onclick="loadInbox()">
+      <i class="fas fa-rotate-right"></i> Refresh
+    </button>
+  </div>
+
+  <div class="inbox-header">
+    <div class="inbox-title">
+      <i class="fas fa-inbox"></i> Messages
+      <span id="countBadge" class="badge-count">0</span>
+    </div>
+    <i class="fas fa-chevron-down" style="color:#5680c7; font-size:0.7rem;"></i>
+  </div>
+
+  <div id="inbox" class="messages-area">
+    <div class="empty-state">
+      <i class="far fa-envelope"></i>
+      <span>Ready · generate an email address</span>
+    </div>
+  </div>
+  <footer>
+    <i class="fas fa-sync-alt"></i> Auto‑refresh every 5s · messages disappear after session
+  </footer>
+</div>
+
+<script>
+  let token = "";
+  let currentEmail = "";
+  const ACCOUNT_PASSWORD = "tempSecure2025!!";
+
+  // Helper to escape HTML
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  function formatDate(isoString) {
+    if (!isoString) return "Just now";
+    try {
+      const date = new Date(isoString);
+      return date.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short' });
+    } catch(e) {
+      return "Unknown date";
+    }
+  }
+
+  async function generateMail() {
+    try {
+      // get domain from mail.tm
+      const domainRes = await fetch("https://api.mail.tm/domains");
+      const domainData = await domainRes.json();
+      const domain = domainData["hydra:member"][0].domain;
+      
+      const randomPart = Math.random().toString(36).substring(2, 12) + Math.floor(Date.now() % 10000);
+      const email = `tmp_${randomPart}@${domain}`;
+      
+      // create account
+      const createResp = await fetch("https://api.mail.tm/accounts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: email, password: ACCOUNT_PASSWORD })
+      });
+      if (!createResp.ok && createResp.status !== 422) {
+        throw new Error("Account creation issue");
+      }
+      
+      // login
+      const tokenResp = await fetch("https://api.mail.tm/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: email, password: ACCOUNT_PASSWORD })
+      });
+      if (!tokenResp.ok) throw new Error("Login failed");
+      const tokenData = await tokenResp.json();
+      token = tokenData.token;
+      currentEmail = email;
+      
+      document.getElementById("email").value = currentEmail;
+      await loadInbox();
+    } catch (err) {
+      console.error(err);
+      alert("⚠️ Network / API issue. Please retry generate.");
+    }
+  }
+
+  async function loadInbox() {
+    if (!token) {
+      const inboxDiv = document.getElementById("inbox");
+      inboxDiv.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-plus-circle"></i>
+          <span>No active session · tap "Generate"</span>
+        </div>
+      `;
+      updateBadge(0);
+      return;
+    }
+    
+    try {
+      const response = await fetch("https://api.mail.tm/messages", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!response.ok) throw new Error("fetch error");
+      const data = await response.json();
+      const mails = data["hydra:member"] || [];
+      const inboxDiv = document.getElementById("inbox");
+      
+      if (mails.length === 0) {
+        inboxDiv.innerHTML = `
+          <div class="empty-state">
+            <i class="far fa-inbox"></i>
+            <span>Your inbox is empty · sit tight</span>
+          </div>
+        `;
+        updateBadge(0);
+        return;
+      }
+      
+      updateBadge(mails.length);
+      const sorted = [...mails].reverse();
+      inboxDiv.innerHTML = "";
+      sorted.forEach(mail => {
+        const mailEl = document.createElement("div");
+        mailEl.className = "mail-card";
+        mailEl.setAttribute("data-id", mail.id);
+        mailEl.innerHTML = `
+          <div class="mail-subject">
+            <span><i class="fas fa-envelope" style="font-size:0.7rem; margin-right:6px;"></i> ${escapeHtml(mail.subject || "(No Subject)")}</span>
+          </div>
+          <div class="mail-from">
+            <i class="fas fa-user-friends"></i> ${escapeHtml(mail.from?.address || "unknown sender")}
+          </div>
+          <div class="mail-date">
+            <i class="far fa-clock"></i> ${formatDate(mail.createdAt)}
+          </div>
+        `;
+        mailEl.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openMail(mail.id);
+        });
+        inboxDiv.appendChild(mailEl);
+      });
+    } catch (err) {
+      console.warn(err);
+      const inboxDiv = document.getElementById("inbox");
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Could not load inbox · pull to refresh</div>`;
+    }
+  }
+
+  async function openMail(id) {
+    if (!token) return;
+    try {
+      const resp = await fetch(`https://api.mail.tm/messages/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const detail = await resp.json();
+      const inboxContainer = document.getElementById("inbox");
+      
+      let contentHtml = "";
+      if (detail.html && detail.html.length > 0 && detail.html[0] && detail.html[0].trim() !== "") {
+        contentHtml = detail.html[0];
+      } else {
+        contentHtml = `<pre>${escapeHtml(detail.text || "Message has no plain text content")}</pre>`;
+      }
+      
+      inboxContainer.innerHTML = `
+        <div class="detail-view">
+          <div class="detail-subject">
+            <i class="far fa-envelope-open" style="margin-right:10px; color:#60a5fa;"></i> 
+            ${escapeHtml(detail.subject || "No Subject")}
+          </div>
+          <div class="detail-meta">
+            <span><i class="fas fa-paper-plane"></i> <strong>From:</strong> ${escapeHtml(detail.from?.address || "Unknown")}</span>
+            <span><i class="fas fa-envelope"></i> <strong>To:</strong> ${escapeHtml(currentEmail)}</span>
+            <span><i class="far fa-calendar"></i> <strong>Date:</strong> ${formatDate(detail.createdAt)}</span>
+          </div>
+          <div class="message-body-content">
+            ${contentHtml}
+          </div>
+          <button class="back-btn" id="mobileBackBtn"><i class="fas fa-arrow-left"></i> Back to Inbox</button>
+        </div>
+      `;
+      const backButton = document.getElementById("mobileBackBtn");
+      if (backButton) {
+        backButton.addEventListener("click", () => loadInbox());
+      }
+    } catch (error) {
+      console.error(error);
+      loadInbox();
+    }
+  }
+
+  function updateBadge(count) {
+    const badgeSpan = document.getElementById("countBadge");
+    if (badgeSpan) badgeSpan.innerText = count;
+  }
+
+  function copyMail() {
+    const emailField = document.getElementById("email").value;
+    if (!emailField || emailField === "") {
+      alert("No email address available. Generate one first.");
+      return;
+    }
+    navigator.clipboard.writeText(emailField).then(() => {
+      const copyBtn = document.querySelector(".copy-btn-icon");
+      const originalHtml = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHtml;
+      }, 1500);
+    }).catch(() => alert("Manual copy: " + emailField));
+  }
+
+  // Auto-refresh only if token exists and we are not in detail view? but safe refresh is fine (won't break detail)
+  let autoRefreshInterval = null;
+  function startAutoRefresh() {
+    if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+    autoRefreshInterval = setInterval(() => {
+      if (token && currentEmail) {
+        // avoid refreshing if user is currently reading a message? we check if detail view exists,
+        // but to improve UX: if .detail-view present, do not auto refresh
+        const isDetailOpen = document.querySelector(".detail-view");
+        if (!isDetailOpen) {
+          loadInbox().catch(e => console.log(e));
+        }
+      }
+    }, 5000);
+  }
+
+  // Ensure loadInbox global is bound, but also patch generate to start refresh
+  window.generateMail = generateMail;
+  window.loadInbox = loadInbox;
+  window.copyMail = copyMail;
+  
+  // initial auto r
