@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>NOOB HACKER BD OFFICIAL TOOL</title>
-  <!-- Google Fonts + Font Awesome 6 (free) -->
+  <title>Tempify · Disposable Email (Netlify Ready)</title>
+  <!-- Google Fonts + Font Awesome 6 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -25,7 +25,6 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* MAIN CARD - fully responsive */
     .container {
       width: 100%;
       max-width: 1000px;
@@ -39,7 +38,6 @@
       transition: all 0.2s ease;
     }
 
-    /* header */
     .header {
       padding: 20px 24px 12px 24px;
       border-bottom: 1px solid rgba(71, 85, 105, 0.5);
@@ -64,24 +62,19 @@
       background: none;
       color: #3b82f6;
       font-size: 1.7rem;
-      text-shadow: 0 0 6px #3b82f680;
     }
 
     .sub {
       color: #90a3bf;
       font-size: 0.75rem;
       margin-top: 8px;
-      font-weight: 400;
-      letter-spacing: -0.2px;
     }
 
-    /* email card - mobile friendly */
     .email-card {
       margin: 20px 20px 16px 20px;
       background: rgba(15, 23, 42, 0.8);
       border-radius: 1.5rem;
       border: 1px solid #2d3a5e;
-      transition: 0.2s;
     }
 
     .email-label {
@@ -114,14 +107,8 @@
       font-size: 0.9rem;
       font-weight: 500;
       outline: none;
-      transition: 0.2s;
       width: 100%;
       min-width: 0;
-    }
-
-    #email:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     }
 
     .copy-btn-icon {
@@ -131,21 +118,13 @@
       border-radius: 1.2rem;
       color: #cbd5ff;
       cursor: pointer;
-      font-weight: 500;
-      transition: 0.2s;
       display: flex;
       align-items: center;
       gap: 8px;
       white-space: nowrap;
+      transition: 0.2s;
     }
 
-    .copy-btn-icon:hover {
-      background: #2d3a60;
-      color: white;
-      transform: translateY(-1px);
-    }
-
-    /* button group - responsive wrap */
     .action-group {
       display: flex;
       gap: 12px;
@@ -171,14 +150,6 @@
       justify-content: center;
     }
 
-    .btn-modern i {
-      font-size: 0.95rem;
-    }
-
-    .btn-modern:active {
-      transform: scale(0.97);
-    }
-
     .btn-primary {
       background: #2563eb;
       border-color: #60a5fa;
@@ -186,14 +157,11 @@
       box-shadow: 0 6px 12px -6px #1e3a8a;
     }
 
-    /* inbox header */
     .inbox-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 8px 20px 0px 20px;
-      margin-top: 6px;
-      flex-wrap: wrap;
     }
 
     .inbox-title {
@@ -214,7 +182,6 @@
       color: #90cdf4;
     }
 
-    /* messages container - touch optimized */
     .messages-area {
       padding: 12px 16px 28px 16px;
       max-height: 520px;
@@ -225,7 +192,6 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* custom smooth scroll */
     .messages-area::-webkit-scrollbar {
       width: 4px;
     }
@@ -238,7 +204,6 @@
       border-radius: 8px;
     }
 
-    /* mail card - big tappable area */
     .mail-card {
       background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(4px);
@@ -247,8 +212,6 @@
       cursor: pointer;
       transition: all 0.2s ease;
       border: 1px solid rgba(71, 85, 105, 0.6);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 100%;
     }
 
     .mail-card:active {
@@ -262,9 +225,6 @@
       color: #f0f9ff;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
       margin-bottom: 10px;
       word-break: break-word;
     }
@@ -275,7 +235,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: 4px;
       word-break: break-all;
     }
 
@@ -288,7 +247,6 @@
       margin-top: 10px;
     }
 
-    /* empty state */
     .empty-state {
       text-align: center;
       padding: 42px 20px;
@@ -296,7 +254,6 @@
       border-radius: 1.8rem;
       border: 1px dashed #334155;
       color: #94a3b8;
-      font-weight: 500;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -308,7 +265,6 @@
       opacity: 0.6;
     }
 
-    /* detail view (mobile optimized) */
     .detail-view {
       background: #0f172af0;
       border-radius: 1.5rem;
@@ -323,7 +279,6 @@
       color: #eef2ff;
       margin-bottom: 16px;
       word-break: break-word;
-      line-height: 1.3;
     }
 
     .detail-meta {
@@ -370,28 +325,16 @@
       font-weight: 500;
       color: #b9d0ff;
       cursor: pointer;
-      transition: 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       width: 100%;
       justify-content: center;
-      font-size: 0.9rem;
-    }
-
-    .back-btn:active {
-      transform: scale(0.97);
     }
 
     @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
     }
 
     footer {
@@ -400,87 +343,15 @@
       padding: 16px 20px 20px;
       color: #5b6e8c;
       border-top: 1px solid rgba(71, 85, 105, 0.3);
-      margin-top: 6px;
     }
 
-    /* 100% MOBILE RESPONSIVE ENHANCEMENTS */
     @media (max-width: 580px) {
-      body {
-        padding: 12px;
-      }
-      .header {
-        padding: 16px 18px 10px 18px;
-      }
-      h1 {
-        font-size: 1.45rem;
-        gap: 8px;
-      }
-      h1 i {
-        font-size: 1.4rem;
-      }
-      .email-card {
-        margin: 14px 14px 12px 14px;
-      }
-      .email-input-area {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        padding: 6px 16px 16px 16px;
-      }
-      .copy-btn-icon {
-        justify-content: center;
-        padding: 11px;
-      }
-      .action-group {
-        margin: 0px 14px 18px 14px;
-        gap: 10px;
-      }
-      .btn-modern {
-        padding: 10px 12px;
-        font-size: 0.8rem;
-        flex: 1;
-      }
-      .inbox-header {
-        padding: 8px 16px 0px 16px;
-      }
-      .messages-area {
-        padding: 10px 12px 22px 12px;
-        max-height: 480px;
-      }
-      .mail-card {
-        padding: 0.85rem 1rem;
-      }
-      .mail-subject {
-        font-size: 0.88rem;
-      }
-      .detail-view {
-        padding: 1rem;
-      }
-      .detail-subject {
-        font-size: 1.1rem;
-      }
-      .message-body-content {
-        padding: 14px;
-        font-size: 0.8rem;
-      }
-      footer {
-        font-size: 0.6rem;
-        padding: 12px 16px 18px;
-      }
-    }
-
-    /* for very small devices */
-    @media (max-width: 380px) {
-      .btn-modern {
-        font-size: 0.7rem;
-        gap: 6px;
-      }
-      .btn-modern i {
-        font-size: 0.8rem;
-      }
-      .inbox-title {
-        font-size: 0.95rem;
-      }
+      body { padding: 12px; }
+      h1 { font-size: 1.45rem; }
+      .email-input-area { flex-direction: column; align-items: stretch; }
+      .copy-btn-icon { justify-content: center; }
+      .btn-modern { padding: 10px 12px; font-size: 0.8rem; }
+      .messages-area { max-height: 460px; }
     }
   </style>
 </head>
@@ -488,190 +359,211 @@
 
 <div class="container">
   <div class="header">
-    <h1>
-      <i class="fas fa-envelope-open-text"></i> 
-      NHBD TEMPMAIL
-    </h1>
-    <div class="sub"><i class="fas fa-shield-alt"></i> disposable · private · auto-refresh</div>
+    <h1><i class="fas fa-envelope-open-text"></i> Tempify</h1>
+    <div class="sub"><i class="fas fa-globe"></i> Netlify ready · temp mail</div>
   </div>
 
   <div class="email-card">
-    <div class="email-label">
-      <i class="fas fa-at"></i> <span>temporary address</span>
-    </div>
+    <div class="email-label"><i class="fas fa-at"></i> <span>disposable address</span></div>
     <div class="email-input-area">
-      <input type="text" id="email" readonly placeholder="Tap 'Generate Mail'">
-      <button class="copy-btn-icon" onclick="copyMail()">
-        <i class="fas fa-copy"></i> <span>Copy</span>
-      </button>
+      <input type="text" id="email" readonly placeholder="Generate new email">
+      <button class="copy-btn-icon" onclick="copyMail()"><i class="fas fa-copy"></i> <span>Copy</span></button>
     </div>
   </div>
 
   <div class="action-group">
-    <button class="btn-modern btn-primary" onclick="generateMail()">
-      <i class="fas fa-magic"></i> Generate
-    </button>
-    <button class="btn-modern" onclick="loadInbox()">
-      <i class="fas fa-rotate-right"></i> Refresh
-    </button>
+    <button class="btn-modern btn-primary" id="generateBtn"><i class="fas fa-magic"></i> Generate Mail</button>
+    <button class="btn-modern" id="refreshBtn"><i class="fas fa-rotate-right"></i> Refresh Inbox</button>
   </div>
 
   <div class="inbox-header">
-    <div class="inbox-title">
-      <i class="fas fa-inbox"></i> Messages
-      <span id="countBadge" class="badge-count">0</span>
-    </div>
+    <div class="inbox-title"><i class="fas fa-inbox"></i> Messages <span id="countBadge" class="badge-count">0</span></div>
     <i class="fas fa-chevron-down" style="color:#5680c7; font-size:0.7rem;"></i>
   </div>
 
   <div id="inbox" class="messages-area">
-    <div class="empty-state">
-      <i class="far fa-envelope"></i>
-      <span>Ready · generate an email address</span>
-    </div>
+    <div class="empty-state"><i class="far fa-envelope"></i><span>Ready · tap "Generate Mail"</span></div>
   </div>
-  <footer>
-    <i class="fas fa-sync-alt"></i> Auto‑refresh every 5s · messages disappear after session
-  </footer>
+  <footer><i class="fas fa-sync-alt"></i> Auto-refresh 5s · works on Netlify/Vercel</footer>
 </div>
 
 <script>
+  // ---------- CONFIGURATION ----------
   let token = "";
   let currentEmail = "";
-  const ACCOUNT_PASSWORD = "tempSecure2025!!";
+  const DEFAULT_PASSWORD = "TempSecure2025!";
 
-  // Helper to escape HTML
-  function escapeHtml(str) {
-    if (!str) return "";
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-      return c;
-    });
-  }
-
-  function formatDate(isoString) {
-    if (!isoString) return "Just now";
-    try {
-      const date = new Date(isoString);
-      return date.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short' });
-    } catch(e) {
-      return "Unknown date";
-    }
-  }
-
-  async function generateMail() {
-    try {
-      // get domain from mail.tm
-      const domainRes = await fetch("https://api.mail.tm/domains");
-      const domainData = await domainRes.json();
-      const domain = domainData["hydra:member"][0].domain;
-      
-      const randomPart = Math.random().toString(36).substring(2, 12) + Math.floor(Date.now() % 10000);
-      const email = `tmp_${randomPart}@${domain}`;
-      
-      // create account
-      const createResp = await fetch("https://api.mail.tm/accounts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address: email, password: ACCOUNT_PASSWORD })
-      });
-      if (!createResp.ok && createResp.status !== 422) {
-        throw new Error("Account creation issue");
+  // Helper: delay and retry logic for flaky networks / CORS resilience
+  async function fetchWithRetry(url, options, retries = 2) {
+    for (let i = 0; i <= retries; i++) {
+      try {
+        const res = await fetch(url, { ...options, mode: 'cors', credentials: 'omit' });
+        if (res.ok || res.status === 422) return res;
+        if (i === retries) return res;
+        await new Promise(r => setTimeout(r, 600));
+      } catch (err) {
+        if (i === retries) throw err;
+        await new Promise(r => setTimeout(r, 800));
       }
-      
-      // login
-      const tokenResp = await fetch("https://api.mail.tm/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address: email, password: ACCOUNT_PASSWORD })
+    }
+    throw new Error("Network failed after retries");
+  }
+
+  // Show temporary toast alert in UI (better than alert)
+  function showMessage(msg, isError = false) {
+    const existingToast = document.querySelector('.temp-toast');
+    if(existingToast) existingToast.remove();
+    const toast = document.createElement('div');
+    toast.className = 'temp-toast';
+    toast.innerText = msg;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = isError ? '#b91c1c' : '#1e3a8a';
+    toast.style.color = 'white';
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '40px';
+    toast.style.fontSize = '0.8rem';
+    toast.style.zIndex = '9999';
+    toast.style.backdropFilter = 'blur(12px)';
+    toast.style.boxShadow = '0 4px 12px black';
+    toast.style.fontWeight = '500';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2800);
+  }
+
+  // Fetch domains and generate full email address
+  async function generateMail() {
+    const genBtn = document.getElementById("generateBtn");
+    const originalText = genBtn.innerHTML;
+    genBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Creating...';
+    genBtn.disabled = true;
+
+    try {
+      // 1) Get available domain
+      const domainRes = await fetchWithRetry("https://api.mail.tm/domains", {
+        method: "GET",
+        headers: { "Accept": "application/json" }
       });
-      if (!tokenResp.ok) throw new Error("Login failed");
+      if (!domainRes.ok) throw new Error("Failed to fetch domains");
+      const domainData = await domainRes.json();
+      const domainsList = domainData["hydra:member"];
+      if (!domainsList || domainsList.length === 0) throw new Error("No domains available");
+      const domain = domainsList[0].domain;
+
+      // 2) Create random email address
+      const randomId = "tmp_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
+      const email = `${randomId}@${domain}`;
+      const password = DEFAULT_PASSWORD;
+
+      // 3) Create account (with proper content-type)
+      const createResp = await fetchWithRetry("https://api.mail.tm/accounts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ address: email, password: password })
+      });
+      
+      // 422 means account might already exist? but with unique random it's rare. still we continue to login.
+      if (!createResp.ok && createResp.status !== 422) {
+        const errText = await createResp.text();
+        throw new Error(`Account creation error: ${createResp.status}`);
+      }
+
+      // 4) Obtain authentication token
+      const tokenResp = await fetchWithRetry("https://api.mail.tm/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ address: email, password: password })
+      });
+      if (!tokenResp.ok) throw new Error("Token request failed");
       const tokenData = await tokenResp.json();
       token = tokenData.token;
       currentEmail = email;
-      
+
+      // Update UI
       document.getElementById("email").value = currentEmail;
+      showMessage("✅ Temporary email created!", false);
       await loadInbox();
     } catch (err) {
-      console.error(err);
-      alert("⚠️ Network / API issue. Please retry generate.");
+      console.error("Generation error:", err);
+      showMessage("⚠️ Failed to generate mail. Check network or retry.", true);
+      // Reset token
+      token = "";
+      currentEmail = "";
+      document.getElementById("email").value = "";
+      const inboxDiv = document.getElementById("inbox");
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><span>Error: ${err.message.substring(0, 70)}</span><span style="font-size:12px;">Tap Generate again</span></div>`;
+      updateBadge(0);
+    } finally {
+      genBtn.innerHTML = originalText;
+      genBtn.disabled = false;
     }
   }
 
+  // Load messages from inbox
   async function loadInbox() {
     if (!token) {
       const inboxDiv = document.getElementById("inbox");
-      inboxDiv.innerHTML = `
-        <div class="empty-state">
-          <i class="fas fa-plus-circle"></i>
-          <span>No active session · tap "Generate"</span>
-        </div>
-      `;
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-key"></i><span>No active session · Generate an email first</span></div>`;
       updateBadge(0);
       return;
     }
-    
+
     try {
-      const response = await fetch("https://api.mail.tm/messages", {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await fetchWithRetry("https://api.mail.tm/messages", {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
       });
-      if (!response.ok) throw new Error("fetch error");
+      if (!response.ok) {
+        if (response.status === 401) {
+          token = "";
+          currentEmail = "";
+          document.getElementById("email").value = "";
+          throw new Error("Session expired. Generate new email.");
+        }
+        throw new Error("Inbox fetch failed");
+      }
       const data = await response.json();
       const mails = data["hydra:member"] || [];
       const inboxDiv = document.getElementById("inbox");
-      
+
       if (mails.length === 0) {
-        inboxDiv.innerHTML = `
-          <div class="empty-state">
-            <i class="far fa-inbox"></i>
-            <span>Your inbox is empty · sit tight</span>
-          </div>
-        `;
+        inboxDiv.innerHTML = `<div class="empty-state"><i class="far fa-inbox"></i><span>No messages yet · waiting...</span></div>`;
         updateBadge(0);
         return;
       }
-      
+
       updateBadge(mails.length);
-      const sorted = [...mails].reverse();
+      const sortedMails = [...mails].reverse();
       inboxDiv.innerHTML = "";
-      sorted.forEach(mail => {
-        const mailEl = document.createElement("div");
-        mailEl.className = "mail-card";
-        mailEl.setAttribute("data-id", mail.id);
-        mailEl.innerHTML = `
-          <div class="mail-subject">
-            <span><i class="fas fa-envelope" style="font-size:0.7rem; margin-right:6px;"></i> ${escapeHtml(mail.subject || "(No Subject)")}</span>
-          </div>
-          <div class="mail-from">
-            <i class="fas fa-user-friends"></i> ${escapeHtml(mail.from?.address || "unknown sender")}
-          </div>
-          <div class="mail-date">
-            <i class="far fa-clock"></i> ${formatDate(mail.createdAt)}
-          </div>
+      sortedMails.forEach(mail => {
+        const mailCard = document.createElement("div");
+        mailCard.className = "mail-card";
+        mailCard.setAttribute("data-id", mail.id);
+        mailCard.innerHTML = `
+          <div class="mail-subject"><span><i class="fas fa-envelope" style="margin-right:6px;"></i> ${escapeHtml(mail.subject || "(No Subject)")}</span></div>
+          <div class="mail-from"><i class="fas fa-user-circle"></i> ${escapeHtml(mail.from?.address || "Unknown")}</div>
+          <div class="mail-date"><i class="far fa-clock"></i> ${formatDate(mail.createdAt)}</div>
         `;
-        mailEl.addEventListener("click", (e) => {
-          e.stopPropagation();
-          openMail(mail.id);
-        });
-        inboxDiv.appendChild(mailEl);
+        mailCard.addEventListener("click", () => openMail(mail.id));
+        inboxDiv.appendChild(mailCard);
       });
     } catch (err) {
       console.warn(err);
       const inboxDiv = document.getElementById("inbox");
-      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Could not load inbox · pull to refresh</div>`;
+      inboxDiv.innerHTML = `<div class="empty-state"><i class="fas fa-bug"></i><span>${err.message}</span><span>↻ Refresh manually</span></div>`;
     }
   }
 
   async function openMail(id) {
     if (!token) return;
     try {
-      const resp = await fetch(`https://api.mail.tm/messages/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const resp = await fetchWithRetry(`https://api.mail.tm/messages/${id}`, {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
       });
+      if (!resp.ok) throw new Error("Cannot load message");
       const detail = await resp.json();
       const inboxContainer = document.getElementById("inbox");
       
@@ -679,76 +571,82 @@
       if (detail.html && detail.html.length > 0 && detail.html[0] && detail.html[0].trim() !== "") {
         contentHtml = detail.html[0];
       } else {
-        contentHtml = `<pre>${escapeHtml(detail.text || "Message has no plain text content")}</pre>`;
+        contentHtml = `<pre>${escapeHtml(detail.text || "(No text content)")}</pre>`;
       }
-      
+
       inboxContainer.innerHTML = `
         <div class="detail-view">
-          <div class="detail-subject">
-            <i class="far fa-envelope-open" style="margin-right:10px; color:#60a5fa;"></i> 
-            ${escapeHtml(detail.subject || "No Subject")}
-          </div>
+          <div class="detail-subject"><i class="far fa-envelope-open" style="margin-right:8px;"></i> ${escapeHtml(detail.subject || "No Subject")}</div>
           <div class="detail-meta">
             <span><i class="fas fa-paper-plane"></i> <strong>From:</strong> ${escapeHtml(detail.from?.address || "Unknown")}</span>
             <span><i class="fas fa-envelope"></i> <strong>To:</strong> ${escapeHtml(currentEmail)}</span>
             <span><i class="far fa-calendar"></i> <strong>Date:</strong> ${formatDate(detail.createdAt)}</span>
           </div>
-          <div class="message-body-content">
-            ${contentHtml}
-          </div>
-          <button class="back-btn" id="mobileBackBtn"><i class="fas fa-arrow-left"></i> Back to Inbox</button>
+          <div class="message-body-content">${contentHtml}</div>
+          <button class="back-btn" id="detailBackBtn"><i class="fas fa-arrow-left"></i> Back to Inbox</button>
         </div>
       `;
-      const backButton = document.getElementById("mobileBackBtn");
-      if (backButton) {
-        backButton.addEventListener("click", () => loadInbox());
-      }
-    } catch (error) {
-      console.error(error);
+      const backBtn = document.getElementById("detailBackBtn");
+      if (backBtn) backBtn.addEventListener("click", () => loadInbox());
+    } catch (err) {
+      console.error(err);
+      showMessage("Could not open message", true);
       loadInbox();
     }
   }
 
-  function updateBadge(count) {
-    const badgeSpan = document.getElementById("countBadge");
-    if (badgeSpan) badgeSpan.innerText = count;
-  }
-
   function copyMail() {
-    const emailField = document.getElementById("email").value;
-    if (!emailField || emailField === "") {
-      alert("No email address available. Generate one first.");
+    const emailVal = document.getElementById("email").value;
+    if (!emailVal || emailVal === "") {
+      showMessage("No email to copy. Generate first.", true);
       return;
     }
-    navigator.clipboard.writeText(emailField).then(() => {
-      const copyBtn = document.querySelector(".copy-btn-icon");
-      const originalHtml = copyBtn.innerHTML;
-      copyBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
-      setTimeout(() => {
-        copyBtn.innerHTML = originalHtml;
-      }, 1500);
-    }).catch(() => alert("Manual copy: " + emailField));
+    navigator.clipboard.writeText(emailVal).then(() => {
+      showMessage("✉️ Email copied to clipboard!", false);
+    }).catch(() => {
+      showMessage("Manual copy: " + emailVal, false);
+    });
   }
 
-  // Auto-refresh only if token exists and we are not in detail view? but safe refresh is fine (won't break detail)
-  let autoRefreshInterval = null;
+  function updateBadge(count) {
+    const badge = document.getElementById("countBadge");
+    if (badge) badge.innerText = count;
+  }
+
+  function formatDate(isoString) {
+    if (!isoString) return "Just now";
+    try {
+      const d = new Date(isoString);
+      return d.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short' });
+    } catch(e) { return "Recent"; }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // Auto refresh handler (secure)
+  let intervalId = null;
   function startAutoRefresh() {
-    if (autoRefreshInterval) clearInterval(autoRefreshInterval);
-    autoRefreshInterval = setInterval(() => {
-      if (token && currentEmail) {
-        // avoid refreshing if user is currently reading a message? we check if detail view exists,
-        // but to improve UX: if .detail-view present, do not auto refresh
-        const isDetailOpen = document.querySelector(".detail-view");
-        if (!isDetailOpen) {
-          loadInbox().catch(e => console.log(e));
-        }
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      if (token && currentEmail && !document.querySelector(".detail-view")) {
+        loadInbox().catch(e => console.log("auto refresh err", e));
       }
     }, 5000);
   }
 
-  // Ensure loadInbox global is bound, but also patch generate to start refresh
+  // Attach global functions and event listeners
   window.generateMail = generateMail;
   window.loadInbox = loadInbox;
   window.copyMail = copyMail;
-  
-  // initial 
+
+  document.getElementById("generateBtn").addEventListener("click", generateMail);
+  document.getElementById("refreshBtn").addEventListener("click", () => {
+    if (!token) showMessage("G
